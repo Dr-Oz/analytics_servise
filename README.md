@@ -19,19 +19,22 @@
 
 # Отправка Запросов
 
-  Вы можете использовать инструменты, такие как cURL или Postman, для отправки запросов на ваш аналитический сервер.
-  Пример cURL Запроса:
-  curl -X POST 'http://localhost:8080/analytics' \
-  --header 'X-Tantum-UserAgent: DeviceID=G1752G75-7C56-4G49-BGFA5ACBGC963471;DeviceType=iOS;OsVersion=15.5;AppVersion=4.3 (725)' \
-  --header 'X-Tantum-Authorization: 2daba111-1e48-4ba1-8753-2daba1119a09' \
-  --header 'Content-Type: application/json' \
-  --data-raw '{
-   "module" : "settings",
-   "type" : "alert",
-   "event" : "click",
-   "name" : "подтверждение выхода",
-   "data" : {"action" : "cancel"}
-  }'
+Вы можете использовать инструменты, такие как cURL или Postman, для отправки запросов на ваш аналитический сервер.
+Пример cURL Запроса:
+curl -X POST 'http://localhost:8080/analytics' \
+--header 'X-Tantum-UserAgent: DeviceID=G1752G75-7C56-4G49-BGFA5ACBGC963471;DeviceType=iOS;OsVersion=15.5;AppVersion=4.3 (725)' \
+--header 'X-Tantum-Authorization: 2daba111-1e48-4ba1-8753-2daba1119a09' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+"module" : "settings",
+"type" : "alert",
+"event" : "click",
+"name" : "подтверждение выхода",
+"data" : {"action" : "cancel"}
+}'
+#  Укажите порт, креды к базе данных и уровень логирования с использованием флагов командной строки
+    Пример: 
+    go run main.go -port=9090 -db-credentials=my_db_creds -log-level=debug
 
 # Результаты тестирования и производительность
 
@@ -47,3 +50,7 @@ Non-2xx responses:      1000
 Requests per second:    24457.05 [#/sec] (mean)
 Time per request:       0.409 [ms] (mean)
 Transfer rate:          2173.43 [Kbytes/sec] received
+
+Операционная система: Ubuntu 20.04 LTS
+Версия Go: 1.16.5
+Использованные библиотеки: github.com/gorilla/mux v1.8.0

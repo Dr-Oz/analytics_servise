@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -33,7 +34,17 @@ var (
 )
 
 func main() {
-	loadConfig() // Load configuration from a file or other source
+	port := flag.Int("port", 8080, "Port to listen for incoming requests")
+	dbCredentials := flag.String("db-credentials", "your_db_credentials", "Database credentials")
+	logLevel := flag.String("log-level", "info", "Log level for the service")
+	configFile := flag.String("config", "config.json", "Path to the configuration file")
+	flag.Parse()
+
+	loadConfig(*configFile) // Load configuration from a file or other source
+
+	config.Port = *port
+	config.DBCredentials = *dbCredentials
+	config.LogLevel = *logLevel
 
 	// Start worker pool for processing analytics data
 	var wg sync.WaitGroup
@@ -78,9 +89,8 @@ func processAnalyticsData(wg *sync.WaitGroup) {
 	}
 }
 
-func loadConfig() {
+func loadConfig(configFile string) {
 	// Load config from file or other source (example below)
-	config.Port = 8080
-	config.DBCredentials = "your_db_credentials"
-	config.LogLevel = "info"
+	// Replace this with actual configuration loading logic
+	// The function will be overridden by flag values
 }
